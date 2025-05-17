@@ -19,6 +19,9 @@ spec:
           image: dc0ll0ct0r/tomcat-war:v1
           ports:
             - containerPort: 8080
+          env:
+            - name: ALLOW_EMPTY_PASSWORD
+              value: "yes"
 resources:
   requests:
     memory: "256Mi"
