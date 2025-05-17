@@ -3,11 +3,9 @@ kind: Service
 metadata:
   name: tomcat-app
 spec:
+  type: LoadBalancer
   selector:
     app: tomcat-app
   ports:
-    - protocol: TCP
-      port: 80
+    - port: 80
       targetPort: 8080
-  type: NodePort
-
