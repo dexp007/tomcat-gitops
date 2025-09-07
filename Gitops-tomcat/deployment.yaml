@@ -16,17 +16,33 @@ spec:
     spec:
       containers:
         - name: tomcat
-          image: dc0ll0ct0r/tomcat-war:v1
+          image: dc0ll0ct0r/tomcat-war:v2
           ports:
             - containerPort: 8080
           env:
             - name: ALLOW_EMPTY_PASSWORD
               value: "yes"
-resources:
-  requests:
-    memory: "256Mi"
-    cpu: "250m"
-  limits:
-    memory: "512Mi"
-    cpu: "500m"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          readinessProbe:
+            httpGet:
+              path: /sample
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /sample
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
 
